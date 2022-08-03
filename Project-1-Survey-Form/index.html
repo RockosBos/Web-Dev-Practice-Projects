@@ -18,7 +18,7 @@
 
 	<h1>Nicholas Kessey's Survey Questionnaire Page</h1>
 
-	<div id="content">
+	<div id="questionBar">
 		<button class="tab" onclick="openQuestion(event, 'q1')">Question 1</button>
 		<button class="tab" onclick="openQuestion(event, 'q2')">Question 2</button>
 		<button class="tab" onclick="openQuestion(event, 'q3')">Question 3</button>
@@ -92,13 +92,13 @@
 			<i data-feather="arrow-left-circle" onclick="openQuestion(event, 'q' + eval(currentQuestion - 1))"></i>
 			<i data-feather="arrow-right-circle" onclick="openQuestion(event, 'q' + eval(currentQuestion + 1))"></i>
 			<input type="reset" value="reset">
-			<input type="submit" value="Submit">
+			<button type="submit" value="Submit">Submit</button>
 	
 		</div>
 	</form>
 
 	<div id="Results">
-		
+		<!--<button onclick="fetchFormData()">Test</button>-->
 	</div>
 	
 	

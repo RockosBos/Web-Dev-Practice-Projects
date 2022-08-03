@@ -1,3 +1,4 @@
+const fileSystem = require("browserify-fs")
 var currentQuestion;
 
 function onLoad(e){
@@ -19,3 +20,24 @@ function openQuestion(event, questionNum){
 	console.log(questionNum);
 }
 
+function handleSubmit(event){
+	event.preventDefault();
+
+	const data = new FormData(event.target);
+
+	const values = Object.fromEntries(data.entries());
+
+	console.log({values});
+	$("#questionBar").hide();
+	$("#questions").hide();
+	$("#NavBar").hide();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+	const form = document.querySelector("form");
+	form.addEventListener('submit', handleSubmit);
+});
+
+function writeToJSON(values){
+	const fileSystem = require("browserify-fs")
+}
