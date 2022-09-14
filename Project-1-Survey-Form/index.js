@@ -10,8 +10,7 @@ mongoose.connect(database, {useUnifiedTopology: true, useNewUrlParser: true})
     .then(() => console.log('e don connect'))
     .catch(err => console.log(err));
 
-app.set('view engine', 'ejs');
-app.use('/', require('./routes/survey'));
+app.use(express.static('/', require('./routes/survey')));
 
 //BodyParsing
 app.use(express.urlencoded({extended: false}));

@@ -5,18 +5,17 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" type="text/css" href="./style.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-	<script src="./index.js"></script>
+	<script type="text/html" src="../scripts/surveyScript.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="./node_modules/feather-icons/dist/feather.js"></script>
+	<!--<script src="./node_modules/feather-icons/dist/feather.js"></script>-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 
 	<title>Kessey Survey</title>
 
 </head>
-<body onload="onLoad(); openQuestion(event, 'q1')">
+<body onload="openQuestion(event, 'q1')">
 
 	<h1>Nicholas Kessey's Survey Questionnaire Page</h1>
 
@@ -108,4 +107,21 @@
 	
 	
 </body>
+
+<script>
+	function openQuestion(event, questionNum){
+	currentQuestion = parseInt(questionNum.substring(1,2));
+	if(currentQuestion > 5){
+		questionNum = "q5";
+		currentQuestion = 5;
+	}
+	if(currentQuestion < 1){
+		questionNum = "q1";
+		currentQuestion = 1;
+	}
+	$(".tabContent").hide();
+	$("#" + questionNum).show();
+}
+</script>
 </html>
+
