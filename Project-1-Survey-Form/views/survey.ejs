@@ -9,7 +9,7 @@
 	<script type="text/html" src="../scripts/surveyScript.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!--<script src="./node_modules/feather-icons/dist/feather.js"></script>-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>-->
 
 
 	<title>Kessey Survey</title>
@@ -28,7 +28,7 @@
 
 	</div>
 
-	<form>
+	<form method="post" action="/surveySubmit">
 		<div id="questions">
 			<div id="q1" class="tabContent">
 				<h4>Question 1</h4>
@@ -93,7 +93,7 @@
 			<i data-feather="arrow-left-circle" onclick="openQuestion(event, 'q' + eval(currentQuestion - 1))"></i>
 			<i data-feather="arrow-right-circle" onclick="openQuestion(event, 'q' + eval(currentQuestion + 1))"></i>
 			<input type="reset" value="reset">
-			<button type="submit" value="Submit">Submit</button>
+			<input id="surveySubmit" type="submit" value="Submit">
 	
 		</div>
 	</form>
@@ -121,7 +121,11 @@
 	}
 	$(".tabContent").hide();
 	$("#" + questionNum).show();
+
 }
+
+const surveySubmit = $("#surveySubmit")
+
 </script>
 </html>
 
