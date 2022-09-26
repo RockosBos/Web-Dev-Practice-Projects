@@ -7,9 +7,8 @@ dotenv.config();
 //mongodb
 const database = process.env.MONGOLAB_URI;
 mongoose.connect(database, {useUnifiedTopology: true, useNewUrlParser: true})
-    .then(() => console.log('e don connect'))
+    .then(() => console.log('Database Connection Established'))
     .catch(err => console.log(err));
-
 
     //BodyParsing
 app.use(express.urlencoded({extended: false}));

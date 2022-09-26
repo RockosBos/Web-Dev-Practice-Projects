@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 const entrySchema = new mongoose.Schema({
-    entryID: {
-        type: Number,
-        required: true,
-    },
     entry1: {
         type: String,
         required: false
