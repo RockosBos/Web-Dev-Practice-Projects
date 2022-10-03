@@ -1,4 +1,4 @@
-const { serializeUser } = require("passport");
+const { mongo, default: mongoose } = require("mongoose");
 const Entry = require("../models/entry");
 
 const surveyView = (req, res) => {
@@ -13,16 +13,24 @@ const resultsView = (req, res) => {
 
 const saveEntry = (req, res, next) => {
     
-    const {entry1, entry2, entry3, entry4, entry5} = req.body;
+    
+    const entry1 = req.body.q1Res;
+    const entry2 = req.body.q2Res;
+    const entry3 = req.body.q3Res;
+    const entry4 = req.body.q4Res;
+    const entry5 = req.body.q5Res;
 
-    const newEntry = Entry({
+    console.log(req.body);
+    console.log(entry1 + " " + entry2 + " " + entry3 + " " + entry4 + " " + entry5);
+
+    const newEntry = new Entry({
         entry1,
         entry2,
         entry3,
         entry4,
         entry5
     });
-    console.log(req.body);
+    console.log(newEntry);
     newEntry.save()
         .then(res.redirect("/"))
         .then(console.log("Data Updated Successfully"))
@@ -32,17 +40,18 @@ const saveEntry = (req, res, next) => {
 };
 
 const getEntry = (req, res, next) => {
-    Entry.find({entry1: "Red"}, (err, docs) => {
+    
+    Entry.find((err, docs) => {
         if(!err){
-            console.log(docs);
-            res.render("survey", {
-                data: docs
-            });
+            docs.map(item => {
+                res.render(item.entry1 + " " + item.entry2 + " " + item.entry3 + " " + item.entry4 + " " + item.entry5);
+            })
+            
         }
-        else{
-            console.log("Failed to retrieve list");
-        }
-    })
+    });
+
+    res.redirect('/');
+    //next();
 }
 
 module.exports = {
