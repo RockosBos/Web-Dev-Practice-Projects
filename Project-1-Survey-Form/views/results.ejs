@@ -9,8 +9,6 @@
 
     <body>
         
-        <p id="doc"><%= document %></p>
-        
         <div style="width: 30%; height: 30%;">
             <canvas id="entry1Chart" width="20px" height="20px"></canvas>
             <canvas id="entry2Chart" width="20px" height="20px"></canvas>
@@ -20,13 +18,18 @@
         </div>
     </body>
 
-    <script>
+    <script type="text/javascript">
         
         $("#doc").hide();
 
-        const doc = $("#doc").html().toString();
-
-        docJSON = JSON.parse(JSON.stringify(doc));
+        try{
+            var docJSON = <%-JSON.stringify(document)%>;
+        }
+        catch(e){
+            console.log("Error Parsing JSON: " + e);
+        }
+        
+        console.log(docJSON);
         
         const entries = {
             entry1:{
@@ -57,7 +60,66 @@
             },
         }
 
-        console.log(docJSON);
+        docJSON.forEach(element => {
+            switch(element.entry1){
+                case "Red":
+                    entries.entry1.answer1++;
+                    break;
+                case "Blue":
+                    entries.entry1.answer2++;
+                    break;
+                case "Green":
+                    entries.entry1.answer3++;
+                    break;
+            }   
+            switch(element.entry2){
+                case "y":
+                    entries.entry2.answer1++;
+                    break;
+                case "n":
+                    entries.entry2.answer2++;
+                    break;
+            }  
+            switch(element.entry3){
+                case "Pizza":
+                    entries.entry3.answer1++;
+                    break;
+                case "Steak":
+                    entries.entry3.answer2++;
+                    break;
+                case "Burgers":
+                    entries.entry3.answer3++;
+                    break;
+                case "Other":
+                    entries.entry3.answer4++;
+                    break;
+            }  
+            switch(element.entry4){
+                case "Cats":
+                    entries.entry4.answer1++;
+                    break;
+                case "Dogs":
+                    entries.entry4.answer2++;
+                    break;
+            }  
+            switch(element.entry5){
+                case "Football":
+                    entries.entry5.answer1++;
+                    break;
+                case "Basketball":
+                    entries.entry5.answer2++;
+                    break;
+                case "Baseball":
+                    entries.entry5.answer3++;
+                    break;
+                case "Hockey":
+                    entries.entry5.answer4++;
+                    break;
+                case "Other":
+                    entries.entry5.answer5++;
+                    break;
+            }  
+        });
 
         const ctx1 = document.getElementById("entry1Chart").getContext('2d');
         const ctx2 = document.getElementById("entry2Chart").getContext('2d');

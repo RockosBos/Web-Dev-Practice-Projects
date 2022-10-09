@@ -6,9 +6,13 @@ const surveyView = (req, res) => {
     res.render("survey", {});
 }
 
-const resultsView = (req, res) => {
+const resultsView = async (req, res, next) => {
 
-    res.render("results", {});
+    Entry.find((err, docs) => {
+        
+        res.render("results", {document: docs});
+    });
+    
 }
 
 const saveEntry = (req, res, next) => {
@@ -39,7 +43,7 @@ const saveEntry = (req, res, next) => {
     
 };
 
-const getEntry = (req, res, next) => {
+/*const getEntry = (req, res, next) => {
     
     Entry.find((err, docs) => {
         if(!err){
@@ -52,11 +56,11 @@ const getEntry = (req, res, next) => {
 
     res.redirect('/');
     //next();
-}
+}*/
 
 module.exports = {
     surveyView,
     resultsView,
     saveEntry,
-    getEntry
+    //getEntry
 };

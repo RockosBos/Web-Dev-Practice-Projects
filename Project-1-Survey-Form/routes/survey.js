@@ -5,7 +5,7 @@ const {surveyView, resultsView, saveEntry, getEntry} = require('../controllers/s
 const router = express.Router();
 
 router.get('/', surveyView);
-router.get('/data', getEntry)
+//router.get('/data', getEntry)
 router.get('/results', resultsView);
 router.post('/surveySubmit', saveEntry);
 
