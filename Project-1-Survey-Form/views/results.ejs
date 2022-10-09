@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        
+        <div style="width: 30%; height: 30%;">
+            <canvas id="entry1Chart" width="20px" height="20px"></canvas>
+            <canvas id="entry2Chart" width="20px" height="20px"></canvas>
+            <canvas id="entry3Chart" width="20px" height="20px"></canvas>
+            <canvas id="entry4Chart" width="20px" height="20px"></canvas>
+            <canvas id="entry5Chart" width="20px" height="20px"></canvas>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        
+        $("#doc").hide();
+
+        try{
+            var docJSON = <%-JSON.stringify(document)%>;
+        }
+        catch(e){
+            console.log("Error Parsing JSON: " + e);
+        }
+        
+        console.log(docJSON);
+        
+        const entries = {
+            entry1:{
+                answer1:0,
+                answer2:0,
+                answer3:0
+            },
+            entry2:{
+                answer1:0,
+                answer2:0
+            },
+            entry3:{
+                answer1:0,
+                answer2:0,
+                answer3:0,
+                answer4:0
+            },
+            entry4:{
+                answer1:0,
+                answer2:0
+            },
+            entry5:{
+                answer1:0,
+                answer2:0,
+                answer3:0,
+                answer4:0,
+                answer5:0
+            },
+        }
+
+        docJSON.forEach(element => {
+            switch(element.entry1){
+                case "Red":
+                    entries.entry1.answer1++;
+                    break;
+                case "Blue":
+                    entries.entry1.answer2++;
+                    break;
+                case "Green":
+                    entries.entry1.answer3++;
+                    break;
+            }   
+            switch(element.entry2){
+                case "y":
+                    entries.entry2.answer1++;
+                    break;
+                case "n":
+                    entries.entry2.answer2++;
+                    break;
+            }  
+            switch(element.entry3){
+                case "Pizza":
+                    entries.entry3.answer1++;
+                    break;
+                case "Steak":
+                    entries.entry3.answer2++;
+                    break;
+                case "Burgers":
+                    entries.entry3.answer3++;
+                    break;
+                case "Other":
+                    entries.entry3.answer4++;
+                    break;
+            }  
+            switch(element.entry4){
+                case "Cats":
+                    entries.entry4.answer1++;
+                    break;
+                case "Dogs":
+                    entries.entry4.answer2++;
+                    break;
+            }  
+            switch(element.entry5){
+                case "Football":
+                    entries.entry5.answer1++;
+                    break;
+                case "Basketball":
+                    entries.entry5.answer2++;
+                    break;
+                case "Baseball":
+                    entries.entry5.answer3++;
+                    break;
+                case "Hockey":
+                    entries.entry5.answer4++;
+                    break;
+                case "Other":
+                    entries.entry5.answer5++;
+                    break;
+            }  
+        });
+
+        const ctx1 = document.getElementById("entry1Chart").getContext('2d');
+        const ctx2 = document.getElementById("entry2Chart").getContext('2d');
+        const ctx3 = document.getElementById("entry3Chart").getContext('2d');
+        const ctx4 = document.getElementById("entry4Chart").getContext('2d');
+        const ctx5 = document.getElementById("entry5Chart").getContext('2d');
+
+        const chart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Red', 'Blue', 'Green'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [entries.entry1.answer1, entries.entry1.answer2, entries.entry1.answer3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        const chart2 = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Yes', 'no'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [entries.entry2.answer1, entries.entry2.answer2],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        const chart3 = new Chart(ctx3, {
+            type: 'pie',
+            data: {
+                labels: ['Pizza', 'Steak', 'Burgers', 'Other'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [entries.entry3.answer1, entries.entry3.answer2, entries.entry3.answer3, entries.entry3.answer4],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        const chart4 = new Chart(ctx4, {
+            type: 'pie',
+            data: {
+                labels: ['Cats', 'dogs'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [entries.entry4.answer1, entries.entry4.answer2],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        const chart5 = new Chart(ctx5, {
+            type: 'pie',
+            data: {
+                labels: ['Football', 'Basketball', 'Baseball', 'Hockey', 'Other'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [entries.entry5.answer1, entries.entry5.answer2, entries.entry5.answer3, entries.entry5.answer4, entries.entry5.answer5],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</html>

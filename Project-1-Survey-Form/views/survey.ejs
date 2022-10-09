@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+	<script type="text/html" src="../scripts/surveyScript.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!--<script src="./node_modules/feather-icons/dist/feather.js"></script>-->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>-->
+
+
+	<title>Kessey Survey</title>
+
+</head>
+<body onload="openQuestion(event, 'q1')">
+
+	<h1>Nicholas Kessey's Survey Questionnaire Page</h1>
+
+	<div id="questionBar">
+		<button class="tab" onclick="openQuestion(event, 'q1')">Question 1</button>
+		<button class="tab" onclick="openQuestion(event, 'q2')">Question 2</button>
+		<button class="tab" onclick="openQuestion(event, 'q3')">Question 3</button>
+		<button class="tab" onclick="openQuestion(event, 'q4')">Question 4</button>
+		<button class="tab" onclick="openQuestion(event, 'q5')">Question 5</button>
+
+	</div>
+
+	<form method="post" action="/surveySubmit">
+		<div id="questions">
+			<div id="q1" class="tabContent">
+				<h4>Question 1</h4>
+				<p>What is your favorite color?</p>
+				<input type="radio" id="q1a1" name="q1Res" value="Red">
+				<label for="q1a1">Red</label><br>
+				<input type="radio" id="q1a2" name="q1Res" value="Blue">
+				<label for="q1a2">Blue</label><br>
+				<input type="radio" id="q1a3" name="q1Res" value="Green">
+				<label for="q1a3">Green</label>
+			</div>
+		
+			<div id="q2" class="tabContent">
+				<h4>Question 2</h4>
+				<p>Do you like video games?</p>
+				<input type="radio" id="q2a1" name="q2Res" value="y">
+				<label for="q2a1">Yes</label><br>
+				<input type="radio" id="q2a2" name="q2Res" value="n">
+				<label for="q1a2">No</label><br>
+			</div>
+		
+			<div id="q3" class="tabContent">
+				<h4>Question 3</h4>
+				<p>What is your favorite food?</p>
+				<input type="radio" id="q3a1" name="q3Res" value="Pizza">
+				<label for="q3a1">Pizza</label><br>
+				<input type="radio" id="q3a2" name="q3Res" value="Steak">
+				<label for="q1a2">Steak</label><br>
+				<input type="radio" id="q3a3" name="q3Res" value="Burgers">
+				<label for="q3a3">Burgers</label><br>
+				<input type="radio" id="q3a4" name="q3Res" value="Other">
+				<label for="q3a4">Other</label>
+			</div>
+		
+			<div id="q4" class="tabContent">
+				<h4>Question 4</h4>
+				<p>Do you prefer cats or dogs?</p>
+				<input type="radio" id="q4a1" name="q4Res" value="Cats">
+				<label for="q1a1">Cats</label><br>
+				<input type="radio" id="q4a2" name="q4Res" value="Dogs">
+				<label for="q4a2">Dogs</label><br>
+			</div>
+		
+			<div id="q5" class="tabContent">
+				<h4>Question 5</h4>
+				<p>What is your favorite sport?</p>
+				<input type="radio" id="q4a1" name="q5Res" value="Football">
+				<label for="q4a1">Football</label><br>
+				<input type="radio" id="q4a2" name="q5Res" value="Basketball">
+				<label for="q4a2">Basketball</label><br>
+				<input type="radio" id="q4a3" name="q5Res" value="Baseball">
+				<label for="q4a3">Baseball</label><br>
+				<input type="radio" id="q4a4" name="q5Res" value="Hockey">
+				<label for="q4a4">Hockey</label><br>
+				<input type="radio" id="q4a5" name="q5Res" value="Other">
+				<label for="q4a5">Other</label><br>
+			</div>
+		</div>
+		
+	
+		<div id="NavBar">
+			<i data-feather="arrow-left-circle" onclick="openQuestion(event, 'q' + eval(currentQuestion - 1))"></i>
+			<i data-feather="arrow-right-circle" onclick="openQuestion(event, 'q' + eval(currentQuestion + 1))"></i>
+			<input type="reset" value="reset">
+			<input id="surveySubmit" type="submit" value="Submit">
+	
+		</div>
+	</form>
+
+	<div id="Results">
+		<canvas id="resultsChart">
+
+		</canvas>
+		
+	</div>
+	
+	<a href="/data">To Data</a>
+	<a href="/results">To Results</a>
+	
+</body>
+
+<script>
+	function openQuestion(event, questionNum){
+	currentQuestion = parseInt(questionNum.substring(1,2));
+	if(currentQuestion > 5){
+		questionNum = "q5";
+		currentQuestion = 5;
+	}
+	if(currentQuestion < 1){
+		questionNum = "q1";
+		currentQuestion = 1;
+	}
+	$(".tabContent").hide();
+	$("#" + questionNum).show();
+
+}
+
+const surveySubmit = $("#surveySubmit")
+
+</script>
+</html>
+
