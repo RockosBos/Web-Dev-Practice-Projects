@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "browserify-fs": "^1.0.0",
-    "feather-icons": "^4.29.0"
-  }
-}
