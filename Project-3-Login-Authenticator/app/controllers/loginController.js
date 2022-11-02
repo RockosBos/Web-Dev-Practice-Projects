@@ -1,20 +1,7 @@
-const passport = require("passport");
+const {mongo, default: mongoose} = require("mongoose");
+const User = require("../models/user");
 
-var app = express();
-
-app.get('/', (req, res) => {
-    res.render("home");
-});
-
-app.get("/secret", isLoggedIn, (req, res) => {
-    res.render("secret");
-});
-
-app.get("/register", (req, res) => {
-    res.render("register");
-})
-
-app.post("/register", (req, res) => {
+const register = (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
 
@@ -29,6 +16,16 @@ app.post("/register", (req, res) => {
                     res.render("secret");
                 }
             );
-    })
-})
+    });
+};
 
+const login = (passport.authenticate("local", {
+    successRedirect: "/secret",
+    failureRedirect: "/login"}),
+    (req, res) => {
+        res.render("login");
+});
+
+
+
+module.exports = {register, login};
