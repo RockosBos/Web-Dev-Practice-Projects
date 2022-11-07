@@ -1,11 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const { db } = require("./app/models/user.model");
-const { initialize } = require("passport");
-const { role } = require("./app/models");
+const db = require("./app/models");
+const dbConfig = require("./app/config/db.config");
 
 const app = express();
+
+const Role = db.role;
 
 var corsOptions = {
   origin: "http://localhost:3000"
@@ -22,12 +23,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     name: "login-session",
-    secret: process.env.COOKIE_KEY, // should use as secret environment variable
+    keys: ['process.env.COOKIE_KEY'], // should use as secret environment variable
     httpOnly: true
   })
 );
 
-db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.db}`, {
+db.mongoose.connect(dbConfig.CONNECTIONSTRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -78,6 +79,9 @@ function initial(){
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to login application." });
 });
+
+require("./app/routes/auth.routes");
+require("./app/routes/user.routes");
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
