@@ -32,6 +32,7 @@ db.mongoose.connect(dbConfig.CONNECTIONSTRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
+    db.mongoose.connection.useDb('login-test');
     console.log("Connected to MongoDB");
     initial();
 }).catch((err) => {
