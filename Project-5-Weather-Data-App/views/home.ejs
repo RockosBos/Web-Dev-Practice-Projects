@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Nick's Weather Api Site</title>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <form method="post" action="/weatherSubmit">
+            <label for="lat">Latitude</label>
+            <input type="text" id="lat" name="lat"><br>
+            <label for="lon">Longitude</label>
+            <input type="text" id="lon" name="lon"><br>
+
+            <input id="weatherSubmit" type="submit" value="Submit">
+        </form>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location"><br>
+        <label for="temp_high">High Temperature:</label>
+        <input type="text" id="temp_high" name="temp_high"><br>
+
+
+    </body>
+
+    <script type="text/javascript">
+        try{
+            var weatherJSON = <%-JSON.stringify(document)%>;
+        }
+        catch(e){
+            console.log("Error Parsing JSON: " + e);
+        }
+
+        weatherJSON = JSON.parse(weatherJSON);
+        
+        console.log(weatherJSON);
+        console.log(weatherJSON.coord.lon);
+
+        /*
+        weatherJSON.forEach(e => {
+            console.log(e);
+        });
+*/
+
+    </script>
+</html>

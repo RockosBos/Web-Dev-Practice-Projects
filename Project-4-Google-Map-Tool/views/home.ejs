@@ -1,9 +1,44 @@
 <html>
     <head>
+        <script src="../script/maps.js"></script>
+        <style>
+            #map {
+                height: 400px;
+                width: 100%;
+            }
 
+        </style>
     </head>
 
     <body>
         
+        <h3>My Google Maps Demo</h3>
+        <div id="map"></div>
+        <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=" + process.env.GOOGLE_MAPS_API_KEY + "&callback=initMap"></script>-->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE9VU7SBNJQHoygaTgIFnRmnQ_Yuz5cT0&callback=initMap"></script>
     </body>
 </html>
+
+<script>
+
+    
+
+function initMap() {
+    // The location of Dixon
+    var dixon = {
+        lat: 41.84201,
+        lng: -89.485937
+    };
+    // The map, centered at Dixon
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 4,
+            center: dixon
+        });
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({
+        position: dixon,
+        map: map
+    });
+}
+</script>
